@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <link rel="icon" href="img/favicon.png" type="image/png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panem Archive — Новости</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="styles/index.css">
+<link rel="stylesheet" href="styles/news.css">
+</head>
+<body class="news-page">
+
+    <main class="content">
+        
+                 <!-- Блок Hero с видео -->
+        <section class="hero">
+            <div class="hero-bg">
+                <div class="hero-bg-layer active">
+                    <img src="img/news-bg.jpg" alt="Фон новостей">
+                </div>
+                <div class="hero-bg-layer">
+                    <video src="img/news-video.mp4" autoplay muted loop playsinline preload="auto"></video>
+                </div>
+                <!-- Затемнение -->
+                <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(90deg, rgba(10,10,10,0.95) 0%, rgba(10,10,10,0.4) 100%); z-index: 3;"></div>
+            </div>
+
+            <!-- Контент с отступами внутри (чтобы текст не прилипал к краям) -->
+            <div class="hero-content" style="padding: 4rem 5rem; position: relative; z-index: 4;">
+                <span class="tag">ГЛАВНАЯ / НОВОСТИ</span>
+                <h1>РАССВЕТ<br>ЖАТВЫ</h1>
+                <p class="hero-desc">За 24 года до основной трилогии: как Хеймитч Эбернети выжил на самых жестоких играх в истории Панема.</p>
+                
+                <!-- Дата и режиссёр -->
+                <div class="hero-meta">
+                    <span class="date">20 НОЯБРЯ 2026</span>
+                    <span class="dot">•</span>
+                    <span class="format">РЕЖИССЁР ФРЭНСИС ЛОУРЕНС</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Блок с датой выхода и постером (как на макете) -->
+        <section class="news-highlight">
+            <div class="highlight-info">
+                <span class="highlight-label">Дата выхода</span>
+                <h2 class="highlight-date">20 ноября 2026</h2>
+                <p class="highlight-sub">в кинотеатрах по всему миру</p>
+                <p class="highlight-text">Рассвет Жатвы расскажет историю пятидесятых Голодных игр, в которых участвовал шестнадцатилетний Хеймитч Эбернети. Зрителей ждут новые персонажи, знакомые лица и возвращение в жестокий, но притягательный мир Панема.</p>
+                <button class="btn-highlight" id="openDetails">Подробнее</button>
+            </div>
+            <div class="highlight-poster">
+                <img src="img/poster-highlight.jpg" alt="Постер Рассвет Жатвы">
+            </div>
+        </section>
+
+                <!-- Блок с трейлером -->
+        <section class="news-trailer">
+            <div class="trailer-header">
+                <h2 class="trailer-title">ОФИЦИАЛЬНЫЙ ТРЕЙЛЕР</h2>
+                <!-- Кнопки переключения трейлеров -->
+                <div class="trailer-tabs">
+                    <button class="trailer-tab active" data-src="img/trailer.mp4">1</button>
+                    <button class="trailer-tab" data-src="img/trailer-2.mp4">2</button>
+                    <button class="trailer-tab" data-src="img/trailer-3.mp4">3</button>
+                </div>
+            </div>
+            
+            <div class="trailer-container">
+                <!-- Плеер. Без рамок и границ -->
+                <video id="mainTrailer" controls style="border: none; outline: none;">
+                    <source src="img/trailer.mp4" type="video/mp4">
+                    Ваш браузер не поддерживает видео.
+                </video>
+            </div>
+        </section>
+
+        <!-- Сетка новостей (как на макете) -->
+<section class="news-feed">
+    <div class="news-grid-vertical">
+        
+                        <!-- НОВАЯ НОВОСТЬ (Сверху) -->
+                <a href="https://x.com/TheHungerGames/status/2113676893580886326?s=20" target="_blank" class="news-card-horizontal">
+                    <div class="news-card-img" style="background-image: url('img/news-9.jpg');"></div>
+                    <div class="news-card-content">
+                        <div class="news-card-top">
+                            <span class="news-badge">За кадром</span>
+                            <span class="news-date">23 октября 2026</span>
+                            <span class="news-new">NEW</span>
+                        </div>
+                        <h3>Узнайте, что вдохновило создателей фильма. Режиссёр Фрэнсис Лоуренс рассказывает о своём подходе к съёмкам «Голодных игр».</h3>
+                    </div>
+                    <div class="news-arrow">→</div>
+                </a>
+        <!-- Новость 1: Саундтрек -->
+        <a href="https://www.universal-music.co.jp/hunger-games/news/2026-10-05/" target="_blank" class="news-card-horizontal" data-index="0">
+            <div class="news-card-img" style="background-image: url('img/news-3.jpg');"></div>
+            <div class="news-card-content">
+                <div class="news-card-top">
+                    <span class="news-badge">Саундтрек «Рассвета жатвы»</span>
+                    <span class="news-date">13 ноября 2026</span>
+                    
+                </div>
+                <h3>Концептуальный альбом, вдохновлённый миром Панема. Будет содержать 29 треков от разных исполнителей.</h3>
+            </div>
+            <div class="news-arrow">→</div>
+        </a>
+
+        <!-- Новость 2: Интервью GQ Australia -->
+        <a href="https://peopletalk.ru/article/zvezda-golodnyh-igr-dzhozef-zada-otkrovenno-rasskazal-o-semkah-ya-byl-razrushen/" target="_blank" class="news-card-horizontal" data-index="1">
+            <div class="news-card-img" style="background-image: url('img/news-2.1.jpg');"></div>
+            <div class="news-card-content">
+                <div class="news-card-top">
+                    <span class="news-badge">Интервью GQ Australia</span>
+                    <span class="news-date">март 2026</span>
+                </div>
+                <h3>Джозеф Зада в интервью GQ Australia рассказал о тяжёлом эмоциональном состоянии после завершения проекта.</h3>
+            </div>
+            <div class="news-arrow">→</div>
+        </a>
+
+        <!-- Новость 3: Показ всех 5 фильмов -->
+        <a href="https://www.fathomentertainment.com/series/the-hunger-games-all-five-films/?utm_source=ig&utm_medium=social&utm_content=link_in_bio&fbclid=PAZXh0bgNhZW0CMTEAc3J0YwZhcHBfaWQPOTM2NjE5NzQzMzkyNDU5AAGnkPwcLCU6_F6SgAPFSyHoXy3odLbESp78thlzhFoF-oCQGBIQsDNlMNwkFTc_aem_oa9gfWqU4mbVj_RpGjywGA#events" target="_blank" class="news-card-horizontal" data-index="2">
+            <div class="news-card-img" style="background-image: url('img/films-bg.jpg');"></div>
+            <div class="news-card-content">
+                <div class="news-card-top">
+                    <span class="news-badge">Показ всех 5 фильмов в кино</span>
+                    <span class="news-date">сентябрь 2026</span>
+                </div>
+                <h3>Все пять фильмов снова в кинотеатрах — до 7 сентября.</h3>
+            </div>
+            <div class="news-arrow">→</div>
+        </a>
+
+        <!-- Новость 4: Интервью с автором книг -->
+        <a href="https://mikayel-abazyan.livejournal.com/21186.html" target="_blank" class="news-card-horizontal" data-index="3">
+            <div class="news-card-img" style="background-image: url('img/news-7.jpg');"></div>
+            <div class="news-card-content">
+                <div class="news-card-top">
+                    <span class="news-badge">Интервью с автором книг</span>
+                    <span class="news-date">4 мая 2025</span>
+                </div>
+                <h3>Перед публикацией романа «Рассвет Жатвы» её автор Сьюзен Коллинз побеседовала о ней.</h3>
+            </div>
+            <div class="news-arrow">→</div>
+        </a>
+
+        <!-- Новость 5: Идеальный кастинг -->
+        <a href="https://postnews.ru/a/38008" target="_blank" class="news-card-horizontal" data-index="4">
+            <div class="news-card-img" style="background-image: url('img/news-5.jpg');"></div>
+            <div class="news-card-content">
+                <div class="news-card-top">
+                    <span class="news-badge">Идеальный кастинг</span>
+                </div>
+                <h3>Вокруг кастинга нового фильма уже успела разгореться настоящая эйфория — с каждым новым именем в касте фанаты всё громче хлопают в ладоши.</h3>
+            </div>
+            <div class="news-arrow">→</div>
+        </a>
+
+        <!-- Новость 6: Актёрский состав -->
+        <a href="https://x.com/TheHungerGames/status/1915163973512810684?s=20" target="_blank" class="news-card-horizontal" data-index="5">
+            <div class="news-card-img" style="background-image: url('img/news-6.jpg');"></div>
+            <div class="news-card-content">
+                <div class="news-card-top">
+                    <span class="news-badge">Актёрский состав</span>
+                </div>
+                <h3>Исполнитель роли молодого Хеймитча Эбернети — Джозеф Зада. Поклонников ждут и другие помолодевшие герои из оригинальной франшизы.</h3>
+            </div>
+            <div class="news-arrow">→</div>
+        </a>
+
+        <!-- Новость 7: Начало съемок -->
+        <a href="https://x.com/TheHungerGames/status/1953123898968686850?s=20" target="_blank" class="news-card-horizontal" data-index="6">
+            <div class="news-card-img" style="background-image: url('img/news-1.jpg');"></div>
+            <div class="news-card-content">
+                <div class="news-card-top">
+                    <span class="news-badge">Начало съемок</span>
+                    <span class="news-date">6 августа 2025</span>
+                </div>
+                <h3>Стартовали съемки приквела. Lionsgate объявила о начале съемок фильма «Голодные игры: Рассвет жатвы».</h3>
+            </div>
+            <div class="news-arrow">→</div>
+        </a>
+
+    </div>
+</section>
+
+        <!-- Подвал -->
+        <footer class="site-footer">
+            <div class="footer-left">
+                <h2><a href="index.html">PANEM ARCHIVE</a></h2>
+                <p>Независимый русскоязычный архив для читателей и зрителей.</p>
+            </div>
+            <div class="footer-links">
+                <div>
+                    <h3>АРХИВ</h3>
+                    <a href="films.html">Фильмы</a>
+                    <a href="books.html">Книги</a>
+                    <a href="characters.html">Персонажи</a>
+                </div>
+                <div>
+                    <h3>СООБЩЕСТВО</h3>
+                    <a href="news.html">Новости</a>
+                    <a href="compare.html">Сравнения</a>
+                   
+                </div>
+                <div>
+                    <h3>ПОДДЕРЖАТЬ</h3>
+                    <a href="#">Донат на развитие</a>
+                    <a href="#">Написать редакции</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>Фанатский некоммерческий проект. Все названия произведений и персонажей принадлежат правообладателям.</p>
+            </div>
+        </footer>
+    </main>
+
+    <!-- Сайдбар -->
+    <button class="mobile-menu-toggle" type="button" aria-controls="site-navigation" aria-expanded="false" onclick="this.nextElementSibling.classList.toggle('mobile-open'); this.setAttribute('aria-expanded', this.nextElementSibling.classList.contains('mobile-open'))">Меню <span aria-hidden="true">☰</span></button>
+    <aside class="sidebar" id="site-navigation">
+        <div class="logo">
+            <img src="img/logo-icon.png" alt="Panem Logo" class="logo-icon">
+            <div class="logo-text">
+                <h1>PANEM ARCHIVE</h1>
+                <p>неофициальный архив вселенной</p>
+            </div>
+        </div>
+
+        <nav class="nav-main">
+            <h3>НАВИГАЦИЯ</h3>
+            <ul>
+                <li><a href="index.html">Главная</a></li>
+                <li><a href="films.html">Фильмы</a></li>
+                <li><a href="books.html">Книги</a></li>
+                <li><a href="characters.html">Персонажи</a></li>
+                <li><a href="news.html" class="active">Новости</a></li>
+                <li><a href="compare.html">Сравнения</a></li>
+                
+            </ul>
+        </nav>
+
+        <div class="collections">
+            <h3>КОЛЛЕКЦИИ</h3>
+            <div class="accordion">
+                <button class="accordion-btn">Фильмы — 6 <span class="arrow">▼</span></button>
+                <div class="accordion-content">
+                    <a href="movie-1.html">Голодные игры</a>
+                    <a href="movie-2.html">И вспыхнет пламя</a>
+                    <a href="movie-3.html">Сойка-пересмешница. Ч. 1</a>
+                    <a href="movie-4.html">Сойка-пересмешница. Ч. 2</a>
+                    <a href="movie-5.html">Баллада о змеях и певчих птицах</a>
+                    <a href="movie-6.html">Рассвет Жатвы</a>
+                </div>
+            </div>
+            <div class="accordion">
+                <button class="accordion-btn">Книги — 5 <span class="arrow">▼</span></button>
+                <div class="accordion-content">
+                    <a href="book-1.html">Голодные игры</a>
+                    <a href="book-2.html">И вспыхнет пламя</a>
+                    <a href="book-3.html">Сойка-пересмешница</a>
+                    <a href="book-4.html">Баллада о змеях и певчих птицах</a>
+                    <a href="book-5.html">Рассвет Жатвы</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="sidebar-footer">
+            <a href="movie-6.html" class="btn-premiere">
+                <span>НОВАЯ ПРЕМЬЕРА</span>
+                <strong>Рассвет<br>Жатвы</strong>
+                <small>20 ноября 2026</small>
+            </a>
+        </div>
+    </aside>
+
+    <!-- МОДАЛЬНЫЕ ОКНА ДЛЯ НОВОСТЕЙ -->
+    <div class="modal-overlay" id="newsModal">
+        <div class="modal-window" style="max-width: 800px;">
+            <button class="modal-close" id="closeNewsModal">✕</button>
+            <div class="modal-content" style="flex-direction: column; padding: 2.5rem;">
+                <h2 id="modalNewsTitle" style="font-family: 'Playfair Display', serif; font-size: 2rem; color: #ecddc4; margin-bottom: 1rem;">Заголовок</h2>
+                <p id="modalNewsText" style="color: #ecddc4; font-size: 1rem; line-height: 1.6; font-weight: 300;">Текст новости...</p>
+                <img id="modalNewsImg" src="" alt="Картинка" style="width: 100%; border-radius: 8px; margin-top: 1.5rem;">
+            </div>
+        </div>
+    </div>
+
+    <!-- СКРИПТЫ -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Аккордеон
+            const accordionBtns = document.querySelectorAll('.accordion-btn');
+            accordionBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    this.parentElement.classList.toggle('active');
+                });
+            });
+
+            // Переключение видео в шапке
+            const layers = document.querySelectorAll('.hero-bg-layer');
+            const IMAGE_DURATION = 5000; 
+            const VIDEO_DURATION = 143000; 
+            if (layers.length > 1) {
+                function switchToVideo() {
+                    layers[0].classList.remove('active'); 
+                    layers[1].classList.add('active');    
+                    const video = layers[1].querySelector('video');
+                    if (video) { video.currentTime = 0; video.play().catch(e => console.log(e)); }
+                    setTimeout(switchToImage, VIDEO_DURATION);
+                }
+                function switchToImage() {
+                    layers[1].classList.remove('active'); 
+                    layers[0].classList.add('active');    
+                    const video = layers[1].querySelector('video');
+                    if (video) video.pause();
+                    setTimeout(switchToVideo, IMAGE_DURATION);
+                }
+                setTimeout(switchToVideo, IMAGE_DURATION);
+            }
+
+            // Открытие модальных окон для новостей
+            
+            const modalTitle = document.getElementById('modalNewsTitle');
+            const modalText = document.getElementById('modalNewsText');
+            const modalImg = document.getElementById('modalNewsImg');
+            const closeBtn = document.getElementById('closeNewsModal');
+
+            // Данные для модальных окон (можно взять из карточек)
+            const newsData = [
+                { title: "Саундтрек «Рассвета жатвы»", text: "Концептуальный альбом, вдохновлённый миром Панема. Будет содержать 29 треков от разных исполнителей. Релиз запланирован на 13 ноября 2026 года.", img: "img/news-1.jpg" },
+                { title: "Интервью GQ Australia", text: "Джозеф Зада в интервью GQ Australia рассказал о тяжёлом эмоциональном состоянии после завершения проекта. Актёр признался, что роль Хеймитча далась ему нелегко.", img: "img/news-2.jpg" },
+                { title: "Показ всех 5 фильмов в кино", text: "Все пять фильмов снова в кинотеатрах — до 7 сентября. Это отличная возможность вспомнить историю перед премьерой приквела.", img: "img/news-3.jpg" },
+                { title: "Интервью с автором книг", text: "Перед публикацией романа «Рассвет Жатвы» её автор Сьюзен Коллинз побеседовала о ней. Писательница поделилась подробностями создания новой истории.", img: "img/news-4.jpg" },
+                { title: "Идеальный кастинг", text: "Вокруг кастинга нового фильма уже успела разгореться настоящая эйфория — с каждым новым именем в касте фанаты всё громче хлопают в ладоши.", img: "img/news-5.jpg" },
+                { title: "Актёрский состав", text: "Исполнитель роли молодого Хеймитча Эбернети — Джозеф Зада. Поклонников ждут и другие помолодевшие герои из оригинальной франшизы.", img: "img/news-6.jpg" },
+                { title: "Начало съемок", text: "Стартовали съемки приквела. Lionsgate объявила о начале съемок фильма «Голодные игры: Рассвет жатвы». Съемки проходят в нескольких локациях.", img: "img/news-7.jpg" }
+            ];
+
+            newsCards.forEach(card => {
+                card.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const index = this.getAttribute('data-index');
+                    const data = newsData[index];
+                    if (data) {
+                        modalTitle.textContent = data.title;
+                        modalText.textContent = data.text;
+                        modalImg.src = data.img;
+                        modal.classList.add('active');
+                    }
+                });
+            });
+
+            if (closeBtn) {
+                closeBtn.addEventListener('click', function() {
+                    modal.classList.remove('active');
+                });
+            }
+
+            if (modal) {
+                modal.addEventListener('click', function(e) {
+                    if (e.target === modal) {
+                        modal.classList.remove('active');
+                    }
+                });
+            }
+        });
+    </script>
+        <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const tabs = document.querySelectorAll('.trailer-tab');
+            const player = document.getElementById('mainTrailer');
+            const source = player.querySelector('source');
+
+            tabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    // 1. Убираем класс active у всех кнопок
+                    tabs.forEach(t => t.classList.remove('active'));
+                    // 2. Добавляем класс active нажатой
+                    this.classList.add('active');
+                    
+                    // 3. Меняем источник видео
+                    const newSrc = this.getAttribute('data-src');
+                    source.src = newSrc;
+                    
+                    // 4. Перезагружаем плеер, чтобы он подхватил новое видео
+                    player.load();
+                    player.play(); // И запускаем
+                });
+            });
+        });
+    </script>
+        <!-- ========================================== -->
+<!-- БЛОК ДОНАТА (ВСТАВИТЬ ПЕРЕД </body>) -->
+<!-- ========================================== -->
+<style>
+    /* Стили для кнопки и окна */
+    #donateBtn {
+        position: fixed;
+        bottom: 30px;
+        left: 30px;
+        z-index: 999;
+        background-color: #c48c51;
+        color: #0a0a0a;
+        border: none;
+        padding: 1rem 1.5rem;
+        border-radius: 50px;
+        font-family: 'Inter', sans-serif;
+        font-size: 0.9rem;
+        font-weight: 600;
+        cursor: pointer;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+        transition: transform 0.3s, background-color 0.3s;
+    }
+    #donateBtn:hover {
+        transform: translateY(-3px);
+        background-color: #d9a56c;
+    }
+    .donate-modal-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(10, 10, 10, 0.9);
+        z-index: 1000;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.3s, visibility 0.3s;
+    }
+    .donate-modal-overlay.active {
+        opacity: 1;
+        visibility: visible;
+    }
+    .donate-modal-window {
+        background-color: #12100e;
+        border: 1px solid #332b23;
+        border-radius: 12px;
+        padding: 2.5rem;
+        width: 90%;
+        max-width: 600px;
+        position: relative;
+        box-shadow: 0 20px 50px rgba(0,0,0,0.8);
+        transform: translateY(20px);
+        transition: transform 0.3s;
+    }
+    .donate-modal-overlay.active .donate-modal-window {
+        transform: translateY(0);
+    }
+    .donate-modal-window h2 {
+        font-family: 'Playfair Display', serif;
+        font-size: 2rem;
+        color: #c48c51;
+        margin-bottom: 0.5rem;
+        text-align: center;
+    }
+    .donate-subtitle {
+        color: #8a8276;
+        text-align: center;
+        margin-bottom: 2rem;
+        font-size: 0.95rem;
+        line-height: 1.5;
+    }
+    .donate-content {
+        display: flex;
+        gap: 2rem;
+        flex-wrap: wrap;
+    }
+    .donate-block {
+        flex: 1;
+        min-width: 250px;
+        background-color: rgba(0,0,0,0.2);
+        padding: 1.5rem;
+        border-radius: 8px;
+        border: 1px solid rgba(51, 43, 35, 0.5);
+    }
+    .donate-block h3 {
+        font-family: 'Inter', sans-serif;
+        color: #ecddc4;
+        font-size: 1.1rem;
+        margin-bottom: 1rem;
+        border-bottom: 1px solid #332b23;
+        padding-bottom: 0.5rem;
+    }
+    .donate-block p {
+        color: #ecddc4;
+        margin-bottom: 1.5rem;
+        font-size: 0.95rem;
+    }
+    .donate-link {
+        display: block;
+        text-align: center;
+        padding: 0.8rem;
+        background-color: rgba(196, 140, 81, 0.1);
+        border: 1px solid #c48c51;
+        color: #c48c51;
+        text-decoration: none;
+        border-radius: 4px;
+        transition: all 0.3s;
+    }
+    .donate-link:hover {
+        background-color: #c48c51;
+        color: #0a0a0a;
+    }
+    .donate-modal-close {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        background: transparent;
+        border: none;
+        color: #8a8276;
+        font-size: 1.5rem;
+        cursor: pointer;
+        transition: color 0.3s;
+    }
+    .donate-modal-close:hover {
+        color: #c48c51;
+    }
+</style>
+
+
+
+<!-- Модальное окно -->
+<div class="donate-modal-overlay" id="donateModal">
+    <div class="donate-modal-window">
+        <button class="donate-modal-close" id="closeDonateModal">✕</button>
+        <h2>Поддержите Panem Archive</h2>
+        <p class="donate-subtitle">Мы будем рады вашей поддержке! Ваш вклад помогает развивать архив.</p>
+        <div class="donate-content">
+            <div class="donate-block">
+                <h3>Поддержать на Boosty</h3>
+                <p>Удобный способ поддержать проект ежемесячно или разово.</p>
+                <a href="https://boosty.to/hazli_qwq/about" target="_blank" class="donate-link">Перейти на Boosty</a>
+            </div>
+            <div class="donate-block">
+                <h3>Перевод на ВТБ</h3>
+                <p>Быстрый перевод по ссылке через приложение банка.</p>
+                <a href="https://c2c.cbrpay.ru/AS1I002SMDIDGLSL96E9A6UFFDBDEE3B" target="_blank" class="donate-link">Перевести на ВТБ</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Скрипт для открытия/закрытия -->
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var donateBtn = document.getElementById('donateBtn');
+        var donateModal = document.getElementById('donateModal');
+        var closeBtn = document.getElementById('closeDonateModal');
+
+        if (donateBtn) {
+            donateBtn.addEventListener('click', function() {
+                donateModal.classList.add('active');
+            });
+        }
+        if (closeBtn) {
+            closeBtn.addEventListener('click', function() {
+                donateModal.classList.remove('active');
+            });
+        }
+        if (donateModal) {
+            donateModal.addEventListener('click', function(e) {
+                if (e.target === donateModal) {
+                    donateModal.classList.remove('active');
+                }
+            });
+        }
+
+        // Для ссылки в подвале
+        var footerLinks = document.querySelectorAll('a');
+        footerLinks.forEach(function(link) {
+            if (link.textContent.trim() === 'Донат на развитие') {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    donateModal.classList.add('active');
+                });
+            }
+        });
+    });
+</script>
+<!-- ========================================== -->
+<!-- МОДАЛЬНОЕ ОКНО "НАПИСАТЬ РЕДАКЦИИ" -->
+<!-- ========================================== -->
+<style>
+    /* Стили для окна редакции */
+    .contact-modal-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(10, 10, 10, 0.9);
+        z-index: 1000;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.3s, visibility 0.3s;
+    }
+    .contact-modal-overlay.active {
+        opacity: 1;
+        visibility: visible;
+    }
+    .contact-modal-window {
+        background-color: #12100e;
+        border: 1px solid #332b23;
+        border-radius: 12px;
+        padding: 2.5rem;
+        width: 90%;
+        max-width: 600px;
+        position: relative;
+        box-shadow: 0 20px 50px rgba(0,0,0,0.8);
+        transform: translateY(20px);
+        transition: transform 0.3s;
+    }
+    .contact-modal-overlay.active .contact-modal-window {
+        transform: translateY(0);
+    }
+    .contact-modal-window h2 {
+        font-family: 'Playfair Display', serif;
+        font-size: 2rem;
+        color: #c48c51;
+        margin-bottom: 0.5rem;
+        text-align: center;
+    }
+    .contact-subtitle {
+        color: #8a8276;
+        text-align: center;
+        margin-bottom: 2rem;
+        font-size: 0.95rem;
+        line-height: 1.5;
+    }
+    .contact-content {
+        display: flex;
+        gap: 1.5rem;
+        flex-wrap: wrap;
+    }
+    .contact-block {
+        flex: 1;
+        min-width: 180px;
+        background-color: rgba(0,0,0,0.2);
+        padding: 1.5rem;
+        border-radius: 8px;
+        border: 1px solid rgba(51, 43, 35, 0.5);
+        text-align: center;
+        text-decoration: none;
+        transition: transform 0.3s, border-color 0.3s;
+    }
+    .contact-block:hover {
+        transform: translateY(-3px);
+        border-color: #c48c51;
+    }
+    .contact-block svg {
+        width: 40px;
+        height: 40px;
+        fill: #c48c51;
+        margin-bottom: 1rem;
+    }
+    .contact-block h3 {
+        font-family: 'Inter', sans-serif;
+        color: #ecddc4;
+        font-size: 1.1rem;
+        margin-bottom: 0.5rem;
+    }
+    .contact-block p {
+        color: #8a8276;
+        font-size: 0.85rem;
+        margin: 0;
+    }
+    .contact-modal-close {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        background: transparent;
+        border: none;
+        color: #8a8276;
+        font-size: 1.5rem;
+        cursor: pointer;
+        transition: color 0.3s;
+    }
+    .contact-modal-close:hover {
+        color: #c48c51;
+    }
+</style>
+
+<!-- Модальное окно -->
+<div class="contact-modal-overlay" id="contactModal">
+    <div class="contact-modal-window">
+        <button class="contact-modal-close" id="closeContactModal">✕</button>
+        <h2>Написать редакции</h2>
+        <p class="contact-subtitle">У вас есть вопрос или предложение? Выберите удобный способ связи.</p>
+        
+        <div class="contact-content">
+            <!-- Telegram -->
+            <a href="https://t.me/Who_Lilka" target="_blank" class="contact-block">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/>
+                </svg>
+                <h3>Telegram</h3>
+                <p>Быстрый ответ</p>
+            </a>
+
+             <!-- ВКонтакте -->
+            <a href="https://vk.com/id695552111" target="_blank" class="contact-block">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12.785 16.241s.288-.032.436-.194c.136-.148.132-.427.132-.427s-.02-1.304.576-1.496c.588-.19 1.341 1.26 2.14 1.82.605.422 1.064.33 1.064.33l2.137-.03s1.117-.07.587-.953c-.043-.072-.307-.646-1.593-1.837-1.343-1.247-1.164-1.045.454-3.202.985-1.313 1.379-2.115 1.256-2.458-.117-.327-.845-.241-.845-.241l-2.405.015s-.178-.025-.31.056c-.13.079-.213.263-.213.263s-.382 1.03-.892 1.907c-1.07 1.85-1.498 1.948-1.673 1.833-.407-.268-.306-1.076-.306-1.65 0-1.795.267-2.543-.52-2.737-.26-.063-.45-.106-1.114-.113-.853-.009-1.573.003-1.982.207-.272.136-.482.44-.354.458.158.022.516.098.706.363.245.34.236 1.104.236 1.104s.14 2.12-.328 2.384c-.32.18-.76-.187-1.704-1.868-.485-.854-.852-1.798-.852-1.798s-.072-.178-.202-.274c-.157-.116-.377-.153-.377-.153l-2.285.015s-.343.01-.468.161c-.112.135-.009.413-.009.413s1.789 4.249 3.815 6.39c1.857 1.964 3.966 1.835 3.966 1.835h.955z"/>
+                </svg>
+                <h3>ВКонтакте</h3>
+                <p>Напишите в личные сообщения</p>
+            </a>
+
+                       <!-- Почта (просто текст) -->
+            <div class="contact-block" style="cursor: default;">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+                </svg>
+                <h3>Почта</h3>
+                <p style="user-select: all; color: #c48c51; font-weight: 600;">liliahazetdinova@gmail.com</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Скрипт для открытия/закрытия окна -->
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var contactModal = document.getElementById('contactModal');
+        var closeContactBtn = document.getElementById('closeContactModal');
+
+        // Открытие при клике на ссылку в подвале
+        var footerLinks = document.querySelectorAll('a');
+        footerLinks.forEach(function(link) {
+            if (link.textContent.trim() === 'Написать редакции') {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    contactModal.classList.add('active');
+                });
+            }
+        });
+
+        // Закрытие по крестику
+        if (closeContactBtn) {
+            closeContactBtn.addEventListener('click', function() {
+                contactModal.classList.remove('active');
+            });
+        }
+
+        // Закрытие по клику на фон
+        if (contactModal) {
+            contactModal.addEventListener('click', function(e) {
+                if (e.target === contactModal) {
+                    contactModal.classList.remove('active');
+                }
+            });
+        }
+    });
+</script>
+</body>
+</html>
