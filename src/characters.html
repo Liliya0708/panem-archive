@@ -743,7 +743,7 @@
         <!-- Подвал (Footer) -->
         <footer class="site-footer">
             <div class="footer-left">
-                <h2>PANEM ARCHIVE</h2>
+                <h2><a href="index.html">PANEM ARCHIVE</a></h2>
                 <p>Независимый русскоязычный архив для читателей и зрителей.</p>
             </div>
             <div class="footer-links">
@@ -772,7 +772,8 @@
     </main>
 
     <!-- Сайдбар -->
-    <aside class="sidebar">
+    <button class="mobile-menu-toggle" type="button" aria-controls="site-navigation" aria-expanded="false" onclick="this.nextElementSibling.classList.toggle('mobile-open'); this.setAttribute('aria-expanded', this.nextElementSibling.classList.contains('mobile-open'))">Меню <span aria-hidden="true">☰</span></button>
+    <aside class="sidebar" id="site-navigation">
         <div class="logo">
             <img src="img/logo-icon.png" alt="Panem Logo" class="logo-icon">
             <div class="logo-text">
@@ -887,6 +888,13 @@
                     // Находим родительскую секцию и переключаем класс active
                     const parentSection = this.closest('.accordion-section');
                     parentSection.classList.toggle('active');
+
+                    // Оставляем открытый раздел в видимой части окна.
+                    if (parentSection.classList.contains('active')) {
+                        setTimeout(function() {
+                            parentSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        }, 50);
+                    }
                 });
             });
         });
@@ -1513,5 +1521,43 @@
         }
     });
 </script>
+<style>
+    @media (max-width: 1100px) {
+        .characters-section {
+            padding: 2rem 1.25rem !important;
+        }
+
+        .characters-grid-new {
+            gap: 1rem !important;
+        }
+    }
+
+    @media (max-width: 700px) {
+        .characters-grid-new {
+            display: grid !important;
+            grid-template-columns: 1fr !important;
+        }
+
+        .character-card-new {
+            width: 100% !important;
+            max-width: 360px;
+            justify-self: center;
+        }
+
+        .char-img {
+            height: 260px !important;
+        }
+
+        .section-header {
+            align-items: flex-start !important;
+            flex-direction: column !important;
+            gap: 0.75rem;
+        }
+
+        .section-header p {
+            text-align: left !important;
+        }
+    }
+</style>
 </body>
 </html>

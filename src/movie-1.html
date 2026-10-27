@@ -133,7 +133,7 @@
         <!-- Подвал -->
         <footer class="site-footer">
             <div class="footer-left">
-                <h2>PANEM ARCHIVE</h2>
+                <h2><a href="index.html">PANEM ARCHIVE</a></h2>
                 <p>Независимый русскоязычный архив для читателей и зрителей.</p>
             </div>
             <div class="footer-links">
@@ -162,7 +162,8 @@
     </main>
 
     <!-- Сайдбар -->
-    <aside class="sidebar">
+    <button class="mobile-menu-toggle" type="button" aria-controls="site-navigation" aria-expanded="false" onclick="this.nextElementSibling.classList.toggle('mobile-open'); this.setAttribute('aria-expanded', this.nextElementSibling.classList.contains('mobile-open'))">Меню <span aria-hidden="true">☰</span></button>
+    <aside class="sidebar" id="site-navigation">
         <div class="logo">
             <img src="img/logo-icon.png" alt="Panem Logo" class="logo-icon">
             <div class="logo-text">

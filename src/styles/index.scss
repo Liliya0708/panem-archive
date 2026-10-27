@@ -745,11 +745,9 @@ a {
 @keyframes fadeInPage {
     from {
         opacity: 0;
-        filter: brightness(0); // Начинаем с полной темноты
     }
     to {
         opacity: 1;
-        filter: brightness(1); // Плавно проявляем
     }
 }
 
@@ -927,5 +925,471 @@ body {
         &:hover {
             color: $accent-gold;
         }
+    }
+}
+
+// --- АДАПТАЦИЯ ДЛЯ ПЛАНШЕТОВ И ТЕЛЕФОНОВ ---
+
+@media (max-width: 900px) {
+    .content {
+        margin-right: 0 !important;
+        width: 100% !important;
+    }
+
+    .hero {
+        min-height: 620px;
+        padding: 7rem 1.5rem 3rem;
+
+        .hero-bg::after {
+            background: linear-gradient(90deg, rgba($bg-dark, 0.95) 0%, rgba($bg-dark, 0.65) 100%);
+        }
+
+        .hero-content {
+            h1 {
+                font-size: clamp(3rem, 13vw, 5rem);
+            }
+
+            .hero-desc {
+                font-size: 1rem;
+            }
+        }
+    }
+
+    .explore-section,
+    .news-section,
+    .site-footer,
+    .catalog-list,
+    .news-highlight,
+    .news-trailer,
+    .news-feed,
+    .movie-page,
+    .compare-main,
+    .compare-table-section,
+    .characters-section {
+        padding-left: 1.25rem;
+        padding-right: 1.25rem;
+    }
+
+    .collections-grid,
+    .news-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .site-footer {
+        grid-template-columns: 1fr;
+
+        .footer-links {
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+    }
+
+    .catalog-hero,
+    .catalog-page-hero {
+        height: 420px !important;
+        padding: 0 1.25rem !important;
+
+        .hero-content h1 {
+            font-size: clamp(2.6rem, 12vw, 4rem) !important;
+        }
+    }
+
+    .catalog-filter-bar,
+    .compare-filter-bar {
+        height: auto;
+        min-height: 80px;
+        padding: 1rem 1.25rem;
+        gap: 1rem;
+
+        .filter-title {
+            font-size: 1.7rem;
+        }
+    }
+
+    .catalog-list .catalog-item,
+    .news-highlight,
+    .news-card-horizontal,
+    .movie-header {
+        flex-direction: column;
+    }
+
+    .catalog-list .catalog-item {
+        gap: 1.5rem;
+
+        .item-poster {
+            width: min(220px, 100%);
+            height: auto;
+            aspect-ratio: 2 / 3;
+        }
+
+        .item-header {
+            flex-wrap: wrap;
+        }
+
+        .item-details .item-desc {
+            font-size: 1rem;
+        }
+    }
+
+    .news-highlight {
+        gap: 2rem;
+
+        .highlight-poster {
+            flex-basis: auto;
+            max-width: 300px;
+        }
+    }
+
+    .news-trailer .trailer-title {
+        white-space: normal;
+        font-size: 2rem;
+    }
+
+    .news-card-horizontal {
+        align-items: flex-start;
+        gap: 1.25rem;
+
+        .news-card-img {
+            width: 100%;
+            height: 180px;
+        }
+    }
+
+    .movie-page {
+        padding-top: 5rem;
+    }
+
+    .movie-header {
+        gap: 2rem;
+        margin-bottom: 3rem;
+    }
+
+    .movie-poster-col {
+        flex-basis: auto;
+        max-width: 350px;
+    }
+
+    .movie-title {
+        font-size: clamp(2.5rem, 11vw, 4rem);
+    }
+
+    .cast-grid {
+        gap: 1.25rem;
+    }
+
+    .compare-main {
+        flex-direction: column;
+        padding-top: 2rem;
+        padding-bottom: 2rem;
+
+        .compare-divider {
+            width: auto;
+            height: 54px;
+        }
+    }
+
+    .compare-table-section {
+        overflow-x: auto;
+
+        .compare-table {
+            min-width: 680px;
+        }
+    }
+
+    .characters-section {
+        padding-top: 2rem;
+        padding-bottom: 2rem;
+    }
+
+    .section-header {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 0.75rem;
+
+        p {
+            text-align: left;
+        }
+    }
+
+    .news-page .hero {
+        height: 460px !important;
+    }
+
+    .news-page .hero-content {
+        padding: 0 1.25rem;
+    }
+
+    #donateBtn {
+        bottom: 18px;
+        left: 18px;
+        padding: 0.8rem 1.1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero {
+        min-height: 560px;
+
+        .hero-meta,
+        .hero-buttons {
+            align-items: flex-start;
+            flex-direction: column;
+        }
+
+        .hero-meta .dot {
+            display: none;
+        }
+
+        .hero-buttons {
+            width: 100%;
+
+            .btn {
+                width: 100%;
+                text-align: center;
+            }
+        }
+    }
+
+    .catalog-filter-bar,
+    .compare-filter-bar {
+        align-items: flex-start !important;
+        flex-direction: column !important;
+    }
+
+    .trailer-tabs {
+        flex-wrap: wrap;
+    }
+
+    .site-footer .footer-links {
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+
+    .donate-modal-window {
+        padding: 2rem 1.25rem;
+
+        .donate-content .donate-block {
+            min-width: 0;
+        }
+    }
+}
+
+// Второй, более широкий уровень адаптации: сайдбар не должен сжимать контент
+// в узком окне ноутбука или на планшете.
+.mobile-menu-toggle {
+    display: none;
+}
+
+// Окна всегда привязаны к текущему видимому экрану, а не к высоте документа.
+.modal-overlay,
+.donate-modal-overlay,
+.contact-modal-overlay {
+    position: fixed !important;
+    inset: 0 !important;
+    display: flex !important;
+    align-items: flex-start !important;
+    justify-content: center !important;
+    overflow-y: auto !important;
+    padding: 76px 1rem 1rem !important;
+    z-index: 1000 !important;
+}
+
+.modal-window {
+    width: min(100%, 1000px) !important;
+    max-height: none !important;
+    margin: 0 auto !important;
+}
+
+.donate-modal-window,
+.contact-modal-window {
+    width: min(100%, 600px) !important;
+    max-height: none !important;
+    margin: 0 auto !important;
+}
+
+@media (max-width: 1100px) {
+    body {
+        padding-top: 58px;
+    }
+
+    .content {
+        margin-right: 0 !important;
+        width: 100% !important;
+    }
+
+    .mobile-menu-toggle {
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 220;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        min-height: 58px;
+        padding: 0 1.25rem;
+        border: 0;
+        border-bottom: 1px solid $border-color;
+        background-color: $bg-sidebar;
+        color: $accent-gold;
+        cursor: pointer;
+        font-family: $font-main;
+        font-size: 0.8rem;
+        font-weight: 600;
+        letter-spacing: 1.5px;
+
+        span {
+            font-size: 1.3rem;
+        }
+    }
+
+    .sidebar {
+        top: 58px;
+        right: 0;
+        width: min(360px, 100%);
+        height: calc(100vh - 58px);
+        padding: 1.5rem 1.25rem 2rem;
+        border-left: 1px solid $border-color;
+        transform: translateX(100%);
+        transition: transform 0.25s ease;
+        z-index: 210;
+
+        &.mobile-open {
+            transform: translateX(0);
+        }
+
+        .logo {
+            margin-bottom: 2rem;
+        }
+
+        .nav-main a {
+            padding: 0.45rem 0;
+        }
+
+        .sidebar-footer {
+            margin-top: 2rem;
+        }
+    }
+
+    .movie-page {
+        padding: 5rem 2rem 3rem;
+    }
+
+    // В каталогах и на странице персонажей размер заголовка задан inline.
+    // Поэтому здесь используется !important, чтобы заголовок не выходил за экран.
+    .hero {
+        padding: 5rem 1.25rem 2.5rem !important;
+
+        .hero-content h1 {
+            font-size: clamp(2.75rem, 10vw, 4.5rem) !important;
+        }
+
+        .hero-content .hero-desc {
+            font-size: 1rem !important;
+        }
+    }
+
+    .catalog-page-hero,
+    .catalog-hero {
+        .hero-content h1 {
+            font-size: clamp(2.75rem, 9vw, 4.25rem) !important;
+        }
+    }
+
+    .movie-main-col {
+        min-width: 0;
+    }
+
+    .movie-title {
+        overflow-wrap: anywhere;
+    }
+
+    .explore-section .explore-header,
+    .news-section .news-header {
+        align-items: flex-start !important;
+        flex-direction: column !important;
+        gap: 1rem !important;
+
+        h2 {
+            white-space: normal !important;
+        }
+    }
+
+    .collections-grid,
+    .news-section .news-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .collections-grid .card .card-image.card-image,
+    .news-section .news-grid .news-card .news-card-img {
+        height: clamp(180px, 28vw, 250px);
+        background-position: center 30%;
+    }
+
+    .collections-grid .card .card-content,
+    .news-section .news-grid .news-card .news-card-content {
+        padding: 1.5rem;
+    }
+}
+
+@media (max-width: 700px) {
+    .movie-page {
+        padding: 5rem 1.25rem 3rem;
+    }
+
+    .hero {
+        min-height: 500px !important;
+
+        .hero-content h1,
+        &.catalog-page-hero .hero-content h1,
+        &.catalog-hero .hero-content h1 {
+            font-size: clamp(2.5rem, 13vw, 3.5rem) !important;
+        }
+    }
+
+    .collections-grid,
+    .news-section .news-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .collections-grid .card .card-image.card-image,
+    .news-section .news-grid .news-card .news-card-img {
+        height: clamp(190px, 58vw, 280px);
+    }
+
+    .news-section .news-grid .news-card h3 {
+        font-size: 1.5rem;
+    }
+
+    .modal-overlay,
+    .donate-modal-overlay,
+    .contact-modal-overlay {
+        padding: 58px 0 0 !important;
+    }
+
+    .modal-window,
+    .donate-modal-window,
+    .contact-modal-window {
+        width: 100% !important;
+        min-height: calc(100vh - 58px);
+        max-height: none !important;
+        margin: 0 !important;
+        border: 0 !important;
+        border-radius: 0 !important;
+    }
+
+    .modal-content {
+        flex-direction: column !important;
+        gap: 1.25rem !important;
+        padding: 1.25rem !important;
+    }
+
+    .modal-image {
+        flex-basis: auto !important;
+        max-width: 260px;
+    }
+
+    .sidebar {
+        width: 100%;
     }
 }
