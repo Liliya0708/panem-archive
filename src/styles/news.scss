@@ -1,0 +1,297 @@
+// ==========================================
+// СТРАНИЦА НОВОСТЕЙ
+// ==========================================
+
+.news-highlight {
+    display: flex;
+    gap: 3rem;
+    padding: 3rem 5rem;
+    background-color: $bg-sidebar;
+    border-bottom: 1px solid $border-color;
+
+    .highlight-info {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        
+        .highlight-label {
+            font-family: $font-main;
+            font-size: 0.9rem;
+            color: $accent-gold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.5rem;
+        }
+
+        .highlight-date {
+            font-family: $font-heading;
+            font-size: 2.5rem;
+            color: $text-main;
+            margin-bottom: 0.5rem;
+            font-weight: 400;
+        }
+
+        .highlight-sub {
+            font-family: $font-main;
+            font-size: 0.9rem;
+            color: $text-muted;
+            margin-bottom: 2rem;
+        }
+
+        .highlight-text {
+            font-family: $font-main;
+            font-size: 1rem;
+            line-height: 1.6;
+            color: $text-main;
+            margin-bottom: 2rem;
+        }
+
+        .btn-highlight {
+            align-self: flex-start;
+            padding: 0.8rem 2rem;
+            background-color: transparent;
+            border: 1px solid $accent-gold;
+            color: $accent-gold;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.3s;
+
+            &:hover {
+                background-color: rgba($accent-gold, 0.1);
+            }
+        }
+    }
+
+    .highlight-poster {
+        flex: 0 0 300px;
+        img {
+            width: 100%;
+            border-radius: 8px;
+            border: 1px solid $border-color;
+        }
+    }
+}
+
+// Блок с трейлером
+.news-trailer {
+    padding: 4rem 5rem;
+    text-align: left; 
+
+    .trailer-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 2rem;
+        flex-wrap: wrap;
+        gap: 1rem;
+    }
+
+    .trailer-title {
+        font-family: $font-heading;
+        font-size: 2.5rem;
+        color: $text-main;
+        margin: 0;
+        text-transform: uppercase;
+        font-weight: 400;
+        white-space: nowrap; 
+    }
+
+    .trailer-tabs {
+        display: flex;
+        gap: 1rem;
+
+        .trailer-tab {
+            background: transparent;
+            border: 1px solid rgba($accent-gold, 0.4);
+            color: $text-muted;
+            padding: 0.5rem 1rem;
+            font-family: $font-main;
+            font-size: 0.9rem;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: all 0.3s;
+
+            &:hover {
+                border-color: $accent-gold;
+                color: $text-main;
+            }
+
+            &.active {
+                background-color: rgba($accent-gold, 0.1);
+                border-color: $accent-gold;
+                color: $accent-gold;
+            }
+        }
+    }
+
+    .trailer-container {
+        max-width: 1000px; // Чуть шире
+        margin: 0; 
+        background-color: #000;
+        border: none; // Убрали границу контейнера
+        border-radius: 8px;
+        aspect-ratio: 16 / 9;
+        overflow: hidden; 
+
+        video {
+            width: 100%;
+            height: 100%;
+            object-fit: contain; // Видео вписывается полностью, без обрезки краев
+            display: block;
+            border: none; 
+            outline: none;
+        }
+    }
+}
+
+// Сетка новостей
+// Сетка новостей (контейнер для карточек)
+.news-feed {
+    padding: 2rem 5rem 4rem; // Отступы: 2rem сверху, 5rem по бокам, 4rem снизу
+    width: 100%;
+    box-sizing: border-box;
+
+    .news-grid-vertical {
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+        width: 100%;
+        max-width: 1400px; // Ограничиваем максимальную ширину
+        margin: 0 auto; // Центрируем
+    }
+}
+    .news-card-horizontal {
+        display: flex;
+        align-items: center;
+        gap: 2.5rem;
+        padding: 2rem 0; // Отступы только сверху и снизу
+        background-color: transparent; // Убираем фон
+        border: none; // Убираем рамку
+        border-bottom: 1px solid $border-color; // Оставляем только линию снизу
+        border-radius: 0; // Убираем скругления
+        text-decoration: none;
+        transition: background-color 0.3s;
+
+        &:hover {
+            background-color: rgba(255, 255, 255, 0.02); // Легкая подсветка при наведении
+            transform: none; // Убираем сдвиг вправо
+        }
+
+        // Убираем линию у последнего элемента
+        &:last-child {
+            border-bottom: none;
+        }
+
+        .news-card-img {
+            width: 220px;
+            height: 140px;
+            flex-shrink: 0;
+            border-radius: 4px;
+            background-size: cover;
+            background-position: center;
+            filter: sepia(0.4) brightness(0.8);
+            border: 1px solid $border-color; // Легкая рамка вокруг картинки
+        }
+
+        .news-card-content {
+            flex: 1;
+
+            .news-card-top {
+                display: flex;
+                align-items: center;
+                gap: 1rem;
+                margin-bottom: 0.8rem;
+
+                // Плашка с названием (как кнопка в фильмах)
+                .news-badge {
+                    background-color: transparent;
+                    color: $accent-gold;
+                    border: 1px solid rgba($accent-gold, 0.5);
+                    padding: 0.4rem 1rem;
+                    border-radius: 4px;
+                    font-size: 0.85rem;
+                    font-weight: 600;
+                    text-transform: none;
+                }
+
+                .news-date {
+                    color: $text-muted;
+                    font-size: 0.9rem;
+                    font-weight: 300;
+                }
+
+                .news-new {
+                    color: $accent-gold;
+                    font-family: $font-heading;
+                    font-size: 1.2rem;
+                    margin-left: auto;
+                }
+            }
+
+            // Заголовок новости (крупный)
+            h3 {
+                font-family: $font-main; // Шрифт без засечек, как в фильмах
+                font-size: 1.3rem;
+                color: $text-main;
+                font-weight: 300;
+                line-height: 1.5;
+                margin: 0;
+                max-width: 800px; // Ограничиваем ширину текста
+            }
+        }
+
+        .news-arrow {
+            font-size: 1.5rem;
+            color: $accent-gold;
+            padding: 0 1rem;
+            opacity: 0.5;
+            transition: opacity 0.3s;
+        }
+        
+        &:hover .news-arrow {
+            opacity: 1;
+        }
+        
+    }
+    
+/* Баннер под видео 1920x1080 (16:9) */
+.news-page .hero {
+    min-height: 0 !important; 
+    height: 60vh !important; /* Фиксированная высота, чтобы не было пустоты */
+    width: 100%;
+    padding: 0 !important;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    overflow: hidden;
+    border-bottom: 1px solid $border-color !important;
+}
+
+/* Настройка самого видео и картинки внутри баннера */
+.news-page .hero-bg,
+.news-page .hero-bg-layer {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.news-page .hero-bg img,
+.news-page .hero-bg video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover !important; /* Вот это ключевое свойство! Заполняет блок полностью */
+    object-position: center; 
+}
+
+/* Сам контент внутри баннера (текст) */
+.news-page .hero-content {
+    padding: 0 5rem;
+    z-index: 4;
+    width: 100%;
+    position: relative; /* Чтобы текст был поверх видео */
+}

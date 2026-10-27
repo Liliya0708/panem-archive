@@ -1,0 +1,931 @@
+// --- ПЕРЕМЕННЫЕ (Цвета и шрифты) ---
+$bg-dark: #0a0a0a;          // Основной черный фон
+$bg-sidebar: #12100e;       // Фон сайдбара (чуть светлее)
+$text-main: #ecddc4;        // Основной цвет текста (светло-бежевый)
+$text-muted: #8a8276;       // Второстепенный текст (серо-коричневый)
+$accent-gold: #c48c51;      // Золотой/бронзовый акцент
+$accent-broun: #804b12;
+$accent-hover: #d9a56c;     // Акцент при наведении
+$border-color: #332b23;     // Цвет рамок
+
+$font-main: 'Inter', sans-serif;
+$font-heading: 'Playfair Display', serif;
+
+// --- СБРОС СТИЛЕЙ ---
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: $bg-dark;
+    color: $text-main;
+    font-family: $font-main;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    // Убираем display: flex, он часто ломает фиксированный сайдбар
+    display: block; 
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+// --- САЙДБАР ---
+.sidebar {
+    
+    width: 280px;
+    background-color: $bg-sidebar;
+    border-left: 1px solid $border-color;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 100vh;       /* Вот это растягивает на весь экран */
+    overflow-y: auto; 
+    z-index: 100;  // Поднимаем выше всего контента
+
+    
+      
+    &::-webkit-scrollbar { width: 5px; }
+    &::-webkit-scrollbar-thumb { background: $border-color; border-radius: 5px; }
+
+    .logo {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        margin-bottom: 3rem;
+        flex-shrink: 0; // Запрещаем сжиматься логотипу
+        
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background-color: $border-color; 
+            border-radius: 50%;
+            object-fit: contain;
+        }
+
+        .logo-text {
+            h1 { 
+                font-family: $font-heading; 
+                font-size: 1.1rem; 
+                color: $accent-gold; 
+                letter-spacing: 1px; 
+                line-height: 1.2;
+            }
+            p { 
+                font-size: 0.6rem; 
+                color: $text-muted; 
+                text-transform: uppercase; 
+                letter-spacing: 1px;
+                margin-top: 3px;
+            }
+        }
+    }
+
+    .nav-main {
+        flex-shrink: 0; // Запрещаем сжиматься меню
+        h3 {
+            font-size: 0.75rem;
+            color: $text-muted;
+            letter-spacing: 2px;
+            margin-bottom: 1.5rem;
+        }
+        ul { list-style: none; }
+        li { margin-bottom: 0.8rem; }
+        a {
+            color: $text-main;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            letter-spacing: 1.5px;
+            transition: color 0.3s;
+            display: block;
+            &:hover, &.active { color: $accent-gold; }
+            &.active { border-left: 2px solid $accent-gold; padding-left: 10px; margin-left: -12px; }
+        }
+    }
+
+    .collections {
+        margin-top: 2rem;
+        flex-shrink: 0;
+        h3 {
+            font-size: 0.75rem;
+            color: $text-muted;
+            letter-spacing: 2px;
+            margin-bottom: 1rem;
+        }
+        p { font-size: 0.8rem; color: $text-main; margin-bottom: 5px; }
+    }
+
+    .sidebar-footer {
+        margin-top: auto; // Прижимает блок к самому низу
+        padding-top: 2rem;
+        
+        .btn-premiere {
+            display: block;
+            border: 1px solid $border-color;
+            padding: 1.2rem;
+            background-color: rgba($accent-broun, 0.3);
+            transition: all 0.3s;
+            
+            &:hover { 
+                border-color: $accent-gold; 
+                background-color: rgba($accent-gold, 0.1);
+            }
+            
+            span { font-size: 0.65rem; color: $accent-gold; display: block; margin-bottom: 5px; letter-spacing: 1px; }
+            strong { font-family: $font-heading; font-size: 1.3rem; display: block; margin-bottom: 5px; color: $text-main; line-height: 1.1; font-weight: 600;}
+            small { font-size: 0.75rem; color: $text-muted; }
+        }
+    }
+}
+
+// --- ОСНОВНОЙ КОНТЕНТ ---
+.content {
+    margin-right: 280px !important; 
+    width: calc(100% - 280px) !important; 
+    min-height: 100vh !important;
+    display: flex !important;
+    flex-direction: column !important; /* Вот это вернет элементы друг под другом */
+}
+// --- БЛОК HERO ---
+.hero {
+    position: relative;
+    display: flex;
+    align-items: flex-end; // Прижимаем контент к низу
+    padding: 4rem 5rem;
+    min-height: 85vh;
+    overflow: hidden;
+    border-bottom: 1px solid $border-color;
+
+    // Слой с фоном
+        // Слой с фоном
+    .hero-bg {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 1;
+
+        // Слои картинок
+        .hero-bg-layer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0; // По умолчанию скрыты
+            transition: opacity 1.5s ease-in-out; // Плавное затухание (1.5 секунды)
+            z-index: 1;
+
+            &.active {
+                opacity: 1; // Показываем активный слой
+                z-index: 2;
+            }
+
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                object-position: 85% center; 
+                filter: sepia(0.4) brightness(0.7) contrast(1.1) saturate(1.3); 
+            }
+                        video {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                object-position: center; 
+                // Тот же теплый фильтр, чтобы видео не выбивалось из стиля
+                filter: sepia(0.3) brightness(0.8) contrast(1.05) saturate(1.2);
+                image-rendering: auto; // Или -webkit-optimize-contrast, если браузер Chrome
+                backface-visibility: hidden; // Убирает размытие при анимациях
+            }
+        }
+
+        // Градиентное затемнение (оно должно быть поверх ВСЕХ картинок)
+        &::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 3; // Градиент всегда сверху
+            background: linear-gradient(90deg, rgba($bg-dark, 1) 0%, rgba($bg-dark, 0.8) 40%, rgba($bg-dark, 0) 70%);
+        }
+    }
+    // Текстовый контент
+    .hero-content {
+        position: relative;
+        z-index: 2;
+        max-width: 700px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start; // Выравниваем всё по левому краю
+        
+        // Плашка
+        .tag { 
+            font-size: 0.75rem; 
+            color: #ecddc4; 
+            text-transform: uppercase; 
+            letter-spacing: 1.5px; 
+            background-color: $accent-broun; // Сплошной золотой цвет
+            padding: 0.4rem 1.2rem;
+            border-radius: 10px; // Легкое скругление (как на макете)
+            margin-bottom: 2rem;
+        }
+
+        // Заголовок
+        h1 { 
+            font-family: $font-heading; 
+            font-size: 6rem; 
+            color: #ecddc4; 
+            margin-bottom: 2rem; 
+            line-height: 0.9; // Уменьшаем межстрочный интервал
+            text-transform: uppercase;
+        }
+
+        // Описание
+        .hero-desc { 
+            color:#f1dbb8; 
+            margin-bottom: 2rem; 
+            font-size: 1.2rem; 
+            font-weight: 200;
+            line-height: 1.5;
+            max-width: 600px;
+        }
+
+        // Дата
+        .hero-meta {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            font-size: 0.85rem;
+            font-weight: 300;
+            letter-spacing: 1.5px;
+            margin-bottom: 2.5rem;
+            color:#f1dbb8; 
+            
+            .date { color: $accent-gold; } // Дата золотым
+        }
+
+        // Кнопки
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            
+            .btn {
+                padding: 0.9rem 2rem;
+                text-transform: uppercase;
+                font-size: 0.8rem;
+                letter-spacing: 1px;
+                border-radius: 4px;
+                transition: all 0.3s;
+                font-weight: 600;
+            }
+            .btn-primary { 
+                background: $accent-gold; 
+                color: $bg-dark; 
+                &:hover { background: $accent-hover; }
+            }
+            .btn-outline { 
+                border: 1px solid $accent-gold; 
+                color: #ecddc4; 
+                background: rgba($bg-dark, 0.5);
+                &:hover { background: $accent-gold; color: $bg-dark; } 
+            }
+        }
+
+        // Мелкий текст в самом низу
+        .hero-credits {
+            font-size: 0.8rem;
+            color: $text-muted;
+            font-style: italic;
+        }
+    }
+}
+
+// --- СЕТКА КАРТОЧЕК ---
+// --- СЕКЦИЯ ИССЛЕДУЙТЕ ВСЕЛЕННУЮ ---
+.explore-section {
+    padding: 4rem 5rem;
+    
+     .explore-header {
+    display: flex !important;
+    flex-direction: row !important; /* Заголовок и текст в одну строку */
+    align-items: center !important; 
+    justify-content: flex-start !important; 
+    gap: 3rem !important; 
+    margin-bottom: 3rem !important;
+
+    h2 {
+        font-family: $font-heading !important;
+        font-size: 3rem !important;
+        color: $text-main !important;
+        text-transform: uppercase !important;
+        letter-spacing: 1px !important;
+        white-space: nowrap !important;
+        margin: 0 !important;
+        font-weight: 400 !important;
+    }
+
+    p {
+        color: #f1dbb8 !important;
+        font-size: 0.85rem !important;
+        line-height: 1.5 !important;
+        text-align: left !important; 
+        margin: 0 !important; 
+        flex: 1 !important; 
+    }
+}
+}
+
+.collections-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); // Ровно 3 колонки
+    gap: 2rem; // Отступ между ними
+
+    .card {
+        display: flex;
+        flex-direction: column;
+        border: 1px solid rgba($border-color, 0.5);
+        border-radius: 12px; // Закругляем углы как на макете
+        overflow: hidden; // Чтобы картинка не вылезала за углы
+        background-color: $bg-sidebar;
+        transition: all 0.3s;
+        
+        &:hover { 
+            border-color: $accent-gold; 
+            transform: translateY(-5px);
+        }
+
+        // Верхняя часть с картинкой/градиентом
+        .card-image.card-image {
+            height: 250px; 
+            width: 100%;
+            position: relative;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            
+            // Фильтр для самой картинки (теплый и чуть темнее)
+            filter: sepia(0.6) brightness(0.7) contrast(1.1) saturate(1.2);
+            
+            // Затемнение поверх картинки (градиент снизу вверх)
+            &::after {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                // Градиент: сверху черный (прозрачный), снизу — сплошной черный
+                background: linear-gradient(to bottom, rgba(13, 11, 9, 0.2) 0%, rgba(13, 11, 9, 0.9) 100%);
+            }
+        }
+
+        // Нижняя часть с текстом
+        .card-content {
+            padding: 2rem;
+            background-color: #0d0b09; // Темный фон снизу
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card-tag {
+            font-size: 0.7rem;
+            color: $accent-gold;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 0.8rem;
+            display: block;
+        }
+
+        h3 { 
+            font-family: $font-heading;
+            font-size: 1.5rem; 
+            margin-bottom: 1rem; 
+            color: $text-main;
+            line-height: 1.2;
+            font-weight: 300;
+        }
+
+        small { 
+            color: $text-muted; 
+            font-size: 0.85rem; 
+            line-height: 1.5; 
+            margin-top: auto; // Прижимает текст к низу
+        }
+    }
+}
+
+// --- ГРАДИЕНТЫ ДЛЯ КАРТОЧЕК (Имитация картинок) ---
+// Если у тебя есть реальные картинки, замени background на url('img/твоя-картинка.jpg')
+// --- КАРТИНКИ ДЛЯ КАРТОЧЕК ---
+.bg-films {
+    background-image: url('../img/films-bg.jpg'); // Путь к твоей картинке
+    background-size: cover; // Картинка заполняет весь блок
+    background-position: center; // Центрируем картинку
+    background-repeat: no-repeat;
+}
+
+.bg-books {
+    background-image: url('../img/books-bg.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.bg-characters {
+    background-image: url('../img/characters-bg.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+// --- СЕКЦИЯ НОВОСТЕЙ ---
+.news-section {
+    padding: 4rem 5rem;
+    border-top: 1px solid $border-color;
+
+    // Шапка секции (Заголовок слева, текст справа)
+        .news-header {
+        display: flex;
+        justify-content: flex-start; // Прижимаем всё к левому краю
+        align-items: flex-end;
+        gap: 3rem; // Отступ между заголовком и текстом (как на скрине 1)
+        margin-bottom: 3rem;
+
+        .news-titles {
+            .news-supertitle {
+                color: $accent-gold;
+                font-size: 0.75rem;
+                text-transform: uppercase;
+                letter-spacing: 2px;
+                display: block;
+                margin-bottom: 0.5rem;
+            }
+
+            h2 { 
+                font-family: $font-heading; 
+                font-size: 3rem; 
+                text-transform: uppercase; 
+                color: $text-main;
+                margin: 0;
+                font-weight: 400;
+                letter-spacing: 1px;
+                white-space: nowrap; // Чтобы заголовок не ломался
+            }
+        }
+
+                .news-desc { 
+            color: #f1dbb8; 
+            font-size: 0.9rem; 
+            line-height: 1.5;
+            text-align: left; // Текст остается слева
+            margin: 0;
+            margin-bottom: 0.5rem; 
+            font-weight: 300;
+            
+            flex: 1; // <--- ВОТ ЭТО РАСТЯГИВАЕТ БЛОК ДО ПРАВОГО КРАЯ
+            max-width: none; // Убираем ограничение в 320px, чтобы текст мог занять всю ширину
+        }
+    }
+
+        // Сетка карточек
+    .news-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr); // Оставляем 3 колонки
+        gap: 2rem;
+        margin-bottom: 3rem;
+        
+        .news-card {
+            display: flex;
+            flex-direction: column; // Картинка сверху, текст снизу
+            border: 1px solid rgba($border-color, 0.5);
+            border-radius: 12px;
+            overflow: hidden;
+            background-color: #0d0b09;
+            transition: all 0.3s;
+            text-decoration: none;
+
+            &:hover {
+                border-color: $accent-gold;
+                transform: translateY(-5px);
+            }
+
+            // Картинка сверху
+            .news-card-img {
+                height: 220px;
+                width: 100%;
+                background-size: cover;
+                background-position: center;
+                position: relative;
+                filter: sepia(0.5) brightness(0.7) contrast(1.1) saturate(1.2);
+                
+                &::after {
+                    content: '';
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    background: linear-gradient(to bottom, transparent 0%, rgba(13, 11, 9, 1) 100%);
+                }
+            }
+
+                        // Контент снизу
+            .news-card-content {
+                padding: 2rem; // Чуть больше отступов, как на 2 скрине
+                display: flex;
+                flex-direction: column;
+                flex-grow: 1;
+            }
+
+            // Строка с плашкой и датой
+            .news-card-top {
+                display: flex;
+                flex-wrap: wrap; 
+                align-items: center;
+                gap: 0.8rem;
+                margin-bottom: 1rem;
+
+                               .news-badge {
+                    // Убрали фон и паддинги, сделали как дату
+                    background-color: transparent;
+                    color: $accent-gold; // Золотой цвет
+                    padding: 0;
+                    font-size: 0.85rem; // Размер как у даты
+                    font-weight: 300; // Тонкий шрифт
+                    text-transform: none; // На макете даты с маленькой буквы
+                    letter-spacing: 1px;
+                }
+
+                .news-date {
+                    color: $accent-gold;
+                    font-size: 0.8rem;
+                    font-weight: 300;
+                }
+
+                .news-new {
+                    color: $accent-gold;
+                    font-family: $font-heading;
+                    font-size: 1.2rem;
+                    margin-left: auto; 
+                    letter-spacing: 1px;
+                }
+            }
+
+            // Заголовок (сделали меньше, как на 2 скрине)
+            h3 { 
+                font-family: $font-heading;
+                font-size: 1.4rem; // Было 1.6, стало меньше и аккуратнее
+                color: #ecddc4; 
+                font-weight: 400;
+                line-height: 1.3;
+                margin-bottom: 0.8rem; // Отступ до мелкого текста
+            }
+
+            // Мелкий текст (добавили, как на 2 скрине)
+            small {
+                color: $text-muted;
+                font-size: 0.85rem;
+                line-height: 1.5;
+                margin-top: auto; // Прижимаем к низу карточки
+            }
+        }
+    }
+
+    // Кнопка "Все новости"
+    .btn-all-news {
+        display: inline-block;
+        padding: 0.8rem 1.5rem;
+        border: 1px solid rgba($text-main, 0.3);
+        color: $text-main;
+        text-decoration: none;
+        font-size: 0.9rem;
+        border-radius: 4px;
+        transition: all 0.3s;
+
+        &:hover {
+            border-color: $accent-gold;
+            color: $accent-gold;
+        }
+    }
+}
+
+// --- ГРАДИЕНТЫ ДЛЯ НОВОСТЕЙ (если нет картинок) ---
+.bg-news-1 { 
+    background-image: url('../img/news-1.jpg'); // Путь к фото со съемок (горы)
+}
+.bg-news-2 { 
+    background-image: url('../img/news-2.jpg'); // Путь к фото с телевизорами
+}
+.bg-news-3 { 
+    background-image: url('../img/news-3.jpg'); // Путь к фото с барабанщиком
+}
+
+// --- БЛОК ОБСУЖДЕНИЙ ---
+.discussions {
+    padding: 6rem 5rem;
+    text-align: center;
+    border-top: 1px solid $border-color;
+    background: radial-gradient(circle at center, #1f1a16 0%, $bg-dark 100%);
+
+    h2 { font-family: $font-heading; font-size: 2.5rem; color: $text-main; margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 2px;font-weight: 400;}
+    h3 { color: $accent-gold; text-transform: uppercase; font-size: 0.9rem; margin-bottom: 1.5rem; letter-spacing: 3px;font-weight: 300;}
+    p { color: $text-muted; max-width: 600px; margin: 0 auto; line-height: 1.6; font-size: 1rem;}
+}
+
+// --- ПОДВАЛ (FOOTER) ---
+.site-footer {
+    padding: 4rem 5rem 2rem;
+    border-top: 1px solid $border-color;
+    background-color: $bg-sidebar;
+    margin-top: auto;
+
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 2rem;
+
+    .footer-left {
+        h2 { font-family: $font-heading; color:$accent-gold; font-size: 1.5rem; margin-bottom: 1rem; letter-spacing: 1px; }
+        p { color: $text-muted; font-size: 0.85rem; line-height: 1.5; max-width: 300px;}
+    }
+
+    .footer-links {
+        display: flex;
+        justify-content: space-between;
+        
+        h3 { font-size: 0.75rem; color: $accent-gold; margin-bottom: 1rem; letter-spacing: 1px; font-weight: 300;}
+        a { display: block; color: $text-main; font-size: 0.85rem; margin-bottom: 0.5rem; transition: color 0.3s;font-weight: 300;
+            &:hover { color: $accent-gold; }
+        }
+    }
+
+    .footer-bottom {
+        grid-column: 1 / -1;
+        border-top: 1px solid $border-color;
+        padding-top: 1.5rem;
+        margin-top: 2rem;
+        p { color: $text-muted; font-size: 0.7rem; }
+    }
+}
+// --- АККОРДЕОН (Выпадающие коллекции) ---
+.accordion {
+    margin-bottom: 0.5rem;
+
+    .accordion-btn {
+        width: 100%;
+        background: none;
+        border: none;
+        color: $text-main;
+        font-family: $font-main;
+        font-size: 0.85rem;
+        text-align: left;
+        cursor: pointer;
+        padding: 0.5rem 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        transition: color 0.3s;
+
+        &:hover {
+            color: $accent-gold;
+        }
+
+        .arrow {
+            font-size: 0.6rem;
+            transition: transform 0.3s ease;
+        }
+    }
+
+    .accordion-content {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease-out;
+        display: flex;
+        flex-direction: column;
+        
+        a {
+            color: $text-muted;
+            font-size: 0.8rem;
+            padding: 0.4rem 0 0.4rem 1rem;
+            text-decoration: none;
+            transition: color 0.3s;
+            border-left: 1px solid transparent;
+
+            &:hover {
+                color: $accent-gold;
+                border-left-color: $accent-gold;
+            }
+        }
+    }
+
+    // Класс, который добавляется через JS при клике
+    &.active {
+        .accordion-btn .arrow {
+            transform: rotate(180deg);
+        }
+        .accordion-content {
+            max-height: 300px; // Достаточно, чтобы поместились все ссылки
+        }
+    }
+}
+// --- ПЛАВНОЕ ПОЯВЛЕНИЕ СТРАНИЦЫ ---
+@keyframes fadeInPage {
+    from {
+        opacity: 0;
+        filter: brightness(0); // Начинаем с полной темноты
+    }
+    to {
+        opacity: 1;
+        filter: brightness(1); // Плавно проявляем
+    }
+}
+
+body {
+    animation: fadeInPage 1s ease-out forwards; // 1s - длительность (можешь поставить 1.5s)
+}
+
+@import 'catalog';
+@import 'characters';
+@import 'news';
+@import 'compare';
+@import 'movie';
+// ==========================================
+// ПЛАВАЮЩАЯ КНОПКА И МОДАЛЬНОЕ ОКНО ДОНАТА
+// ==========================================
+
+#donateBtn {
+    position: fixed;
+    bottom: 30px;
+    left: 30px; // Слева, чтобы не мешать сайдбару справа
+    z-index: 999;
+    background-color: $accent-gold;
+    color: $bg-dark;
+    border: none;
+    padding: 1rem 1.5rem;
+    border-radius: 50px;
+    font-family: $font-main;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+    transition: transform 0.3s, background-color 0.3s;
+
+    &:hover {
+        transform: translateY(-3px);
+        background-color: $accent-hover;
+    }
+}
+
+.donate-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba($bg-dark, 0.9);
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s, visibility 0.3s;
+
+    &.active {
+        opacity: 1;
+        visibility: visible;
+    }
+}
+
+.donate-modal-window {
+    background-color: $bg-sidebar;
+    border: 1px solid $border-color;
+    border-radius: 12px;
+    padding: 2.5rem;
+    width: 90%;
+    max-width: 600px;
+    position: relative;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.8);
+    transform: translateY(20px);
+    transition: transform 0.3s;
+
+    .donate-modal-overlay.active & {
+        transform: translateY(0);
+    }
+
+    h2 {
+        font-family: $font-heading;
+        font-size: 2rem;
+        color: $accent-gold;
+        margin-bottom: 0.5rem;
+        text-align: center;
+    }
+
+    .donate-subtitle {
+        color: $text-muted;
+        text-align: center;
+        margin-bottom: 2rem;
+        font-size: 0.95rem;
+        line-height: 1.5;
+    }
+
+    .donate-content {
+        display: flex;
+        gap: 2rem;
+        flex-wrap: wrap;
+
+        .donate-block {
+            flex: 1;
+            min-width: 250px;
+            background-color: rgba(0,0,0,0.2);
+            padding: 1.5rem;
+            border-radius: 8px;
+            border: 1px solid rgba($border-color, 0.5);
+
+            h3 {
+                font-family: $font-main;
+                color: $text-main;
+                font-size: 1.1rem;
+                margin-bottom: 1rem;
+                border-bottom: 1px solid $border-color;
+                padding-bottom: 0.5rem;
+            }
+
+            p {
+                color: $text-main;
+                margin-bottom: 0.5rem;
+                font-size: 0.95rem;
+
+                strong {
+                    color: $accent-gold;
+                }
+            }
+
+            .card-name {
+                font-size: 0.85rem;
+                color: $text-muted;
+                margin-top: 0.5rem;
+            }
+
+            .link-buttons {
+                display: flex;
+                flex-direction: column;
+                gap: 0.8rem;
+                margin-bottom: 1rem;
+
+                .donate-link {
+                    display: block;
+                    text-align: center;
+                    padding: 0.8rem;
+                    background-color: rgba($accent-gold, 0.1);
+                    border: 1px solid $accent-gold;
+                    color: $accent-gold;
+                    text-decoration: none;
+                    border-radius: 4px;
+                    transition: all 0.3s;
+
+                    &:hover {
+                        background-color: $accent-gold;
+                        color: $bg-dark;
+                    }
+                }
+            }
+
+            .donate-note {
+                font-size: 0.75rem;
+                color: $text-muted;
+                font-style: italic;
+                margin: 0;
+            }
+        }
+    }
+
+    .donate-modal-close {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        background: transparent;
+        border: none;
+        color: $text-muted;
+        font-size: 1.5rem;
+        cursor: pointer;
+        transition: color 0.3s;
+
+        &:hover {
+            color: $accent-gold;
+        }
+    }
+}

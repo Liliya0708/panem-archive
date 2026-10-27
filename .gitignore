@@ -1,0 +1,23 @@
+# Зависимости (скачиваются через npm install)
+node_modules/
+
+# Папка сборки (генерируется Gulp'ом)
+dist/
+
+# Системные и временные файлы ОС
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Логи ошибок
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Файлы окружения (если появятся)
+.env
+.env.local
+
+# Настройки вашей среды разработки (редактора)
+.vscode/
+.idea/

@@ -1,0 +1,202 @@
+// ==========================================
+// СТРАНИЦА ФИЛЬМА (ДЕТАЛЬНАЯ)
+// ==========================================
+
+.movie-page {
+    padding: 3rem 5rem;
+}
+
+.movie-header {
+    display: flex;
+    gap: 3rem;
+    margin-bottom: 4rem;
+}
+
+/* Левая колонка: Постер и инфо */
+.movie-poster-col {
+    flex: 0 0 350px;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+
+    img {
+        width: 100%;
+        border-radius: 12px;
+        border: 1px solid $border-color;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    }
+}
+
+.movie-info-block {
+    background-color: $bg-sidebar;
+    border: 1px solid $border-color;
+    border-radius: 12px;
+    padding: 1.5rem;
+}
+
+.info-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.8rem;
+    font-family: $font-main;
+    font-size: 0.9rem;
+
+    &:last-child {
+        margin-bottom: 0;
+    }
+}
+
+.info-label {
+    color: $text-muted;
+}
+
+.info-value {
+    color: $text-main;
+    font-weight: 600;
+}
+
+.rating-block {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid $border-color;
+}
+
+.rating-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    span:first-child {
+        font-family: $font-heading;
+        font-size: 1.8rem;
+        color: $accent-gold;
+        line-height: 1;
+    }
+
+    span:last-child {
+        font-size: 0.7rem;
+        color: $text-muted;
+        text-transform: uppercase;
+        margin-top: 0.3rem;
+    }
+}
+
+/* Правая колонка: Текст и трейлер */
+.movie-main-col {
+    flex: 1;
+}
+
+.movie-title {
+    font-family: $font-heading;
+    font-size: 4rem;
+    color: $text-main;
+    text-transform: uppercase;
+    line-height: 0.9;
+    margin-bottom: 1rem;
+}
+
+.movie-subtitle {
+    color: $text-muted;
+    font-family: $font-main;
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+    letter-spacing: 1px;
+}
+
+.trailer-container {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    background-color: #000;
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 3rem;
+    border: 1px solid $border-color;
+
+    video, iframe {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border: none;
+    }
+}
+
+.section-title {
+    font-family: $font-heading;
+    font-size: 2rem;
+    color: $accent-gold;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+    border-bottom: 1px solid $border-color;
+    padding-bottom: 0.5rem;
+}
+
+.movie-synopsis {
+    font-family: $font-main;
+    color: $text-main;
+    font-size: 1rem;
+    line-height: 1.7;
+    font-weight: 300;
+    margin-bottom: 3rem;
+}
+
+/* Блок режиссера и актеров */
+.cast-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    margin-bottom: 3rem;
+}
+
+.cast-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 120px;
+    text-align: center;
+
+    img {
+        width: 100px;
+        height: 100px;
+        object-fit: cover;
+        border-radius: 50%;
+        border: 2px solid $border-color;
+        margin-bottom: 0.8rem;
+        transition: border-color 0.3s;
+    }
+
+    &:hover img {
+        border-color: $accent-gold;
+    }
+}
+
+.cast-name {
+    font-family: $font-main;
+    color: $text-main;
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-bottom: 0.2rem;
+}
+
+.cast-role {
+    font-family: $font-main;
+    color: $text-muted;
+    font-size: 0.75rem;
+}
+
+/* Кнопка назад */
+.back-link {
+    display: inline-block;
+    margin-bottom: 2rem;
+    color: $text-muted;
+    text-decoration: none;
+    font-family: $font-main;
+    font-size: 0.9rem;
+    transition: color 0.3s;
+
+    &:hover {
+        color: $accent-gold;
+    }
+}
